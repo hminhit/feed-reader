@@ -1,0 +1,16 @@
+<div data-channel-category-container>
+    <div data-coordinate-group="channel-category" data-prototype="{{ include('FeedReaderBundle:Feed:elements/channel/category/_category.html.twig', {feedChannelCategoryForm: feedChannelForm.channelCategory.vars.prototype})|e('html_attr') }}">
+        {% for feedChannelCategoryForm in feedChannelForm.channelCategory %}
+            {% include('FeedReaderBundle:Feed:elements/channel/category/_category.html.twig') %}
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-1 control-label"></label>
+        <div class="col-md-11">
+            <button type="button" class="btn btn-primary" data-btn-add-channel-category>Add new channel category <i
+                        class="glyphicon glyphicon-plus"></i>
+            </button>
+        </div>
+    </div>
+</div>

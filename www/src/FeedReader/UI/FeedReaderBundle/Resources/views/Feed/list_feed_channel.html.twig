@@ -1,0 +1,80 @@
+{% extends 'FeedReaderBundle:Layout:feed_layout.html.twig' %}
+{% block sub_head_title %}List of Channels{% endblock %}
+{% block feed_body %}
+    <div class="main">
+        <h1 class="page-header">List of Channels</h1>
+        <div class="quick-actions">
+            <a href="{{ path('feed_reader_feed_add_feed_channel') }}" class="btn btn-primary btn-lg">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                Add a new channel
+            </a>
+        </div>
+        {% if app.session.flashbag.has('notice') %}
+            {% set notice = app.session.flashbag.get('notice').0 %}
+            <div class="alert alert-{{ notice.status }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                {{ notice.msg }}
+            </div>
+        {% endif %}
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">List of Channels</div>
+            <div class="panel-body">
+                {% include('FeedReaderBundle:Feed:_filter_feed_channel.html.twig') %}
+                <!-- Table -->
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>Feed</th>
+                        <th class="col-md-1">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for feedChannel in listFeedChannelIterator %}
+                        <tr>
+                            <td>{{ feedChannel.channelTitle }}</td>
+                            <td>
+                                <a href="{{ path('feed_reader_feed_edit_feed_channel', {'channel_id': feedChannel.feedChannelId}) }}"><span
+                                            class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                <a href="{{ path('feed_reader_feed_remove_feed_channel', {'channel_id': feedChannel.feedChannelId}) }}"
+                                   onclick="return confirm('Are you sure you want to delete this channel?');"><span
+                                            class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="2" class="text-center">No record</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation" class="text-center">
+                    {{ knp_pagination_render(listFeedChannelIterator) }}
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript_inline %}
+    <script src="{{ asset('bundles/feedreader/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+    <script type="text/javascript">
+        var FilterListFeedChannel = {
+            init: function () {
+                this.validateForm();
+            },
+            validateForm: function () {
+                $('[data-form-filter-list-channel]').validate({
+                    rules: {
+                        'filter_list_channel[feedChannelCategory]': {
+                            required: true
+                        }
+                    }
+                });
+            }
+        };
+        $(document).ready(function () {
+            FilterListFeedChannel.init();
+        });
+    </script>
+{% endblock %}

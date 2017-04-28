@@ -1,0 +1,130 @@
+FeedReader\Domain\Model\Feed\FeedChannel:
+    type: entity
+    table: feed_reader_feed_channel
+    repositoryClass: FeedReader\Infrastructure\Persistence\Doctrine\Repository\DoctrineFeedChannelRepository
+    id:
+        feedChannelId:
+            column: channel_id
+            type: FeedChannelId
+    fields:
+        channelTitle:
+            type: string
+            column: channel_title
+        channelDescription:
+            type: text
+            column: channel_description
+        channelLink:
+            type: string
+            column: channel_link
+#        channelLanguage:
+#            type: string
+#            column: channel_language
+#            nullable: true
+#        channelCopyright:
+#            type: string
+#            column: channel_copyright
+#            nullable: true
+#        channelManagingEditor:
+#            type: string
+#            column: channel_managing_editor
+#            nullable: true
+#        channelWebMaster:
+#            type: string
+#            column: channel_web_master
+#            nullable: true
+#        channelPubDate:
+#            type: datetime
+#            column: channel_pub_date
+#            nullable: true
+#        channelLastBuildDate:
+#            type: datetime
+#            column: channel_last_build_date
+#            nullable: true
+#        channelGenerator:
+#            type: string
+#            column: channel_generator
+#            nullable: true
+#        channelDocs:
+#            type: string
+#            column: channel_docs
+#            nullable: true
+#        channelCloudDomain:
+#            type: string
+#            column: channel_cloud_domain
+#            nullable: true
+#        channelCloudPort:
+#            type: string
+#            column: channel_cloud_port
+#            nullable: true
+#        channelCloudPath:
+#            type: string
+#            column: channel_cloud_path
+#            nullable: true
+#        channelCloudRegisterProcedure:
+#            type: string
+#            column: channel_cloud_register_procedure
+#            nullable: true
+#        channelCloudProtocol:
+#            type: string
+#            column: channel_cloud_protocol
+#            nullable: true
+#        channelImageTitle:
+#            type: string
+#            column: channel_image_title
+#            nullable: true
+#        channelImageDescription:
+#            type: string
+#            column: channel_image_description
+#            nullable: true
+#        channelImageLink:
+#             type: string
+#             column: channel_image_link
+#             nullable: true
+#        channelImageWidth:
+#            type: string
+#            column: channel_image_width
+#            nullable: true
+#        channelImageHeight:
+#            type: string
+#            column: channel_image_height
+#            nullable: true
+#        channelTextInputTitle:
+#            type: string
+#            column: channel_text_input_title
+#            nullable: true
+#        channelTextInputDescription:
+#             type: text
+#             column: channel_text_input_description
+#             nullable: true
+#        channelTextInputName:
+#            type: string
+#            column: channel_text_input_name
+#            nullable: true
+#        channelTextInputLink:
+#            type: string
+#            column: channel_text_input_link
+#            nullable: true
+#        channelTtl:
+#            type: string
+#            column: channel_ttl
+#            nullable: true
+#        channelSkipHours:
+#            type: string
+#            column: channel_skip_hours
+#            nullable: true
+#        channelSkipDays:
+#            type: string
+#            column: channel_skip_days
+#            nullable: true
+    oneToMany:
+        channelItem:
+            targetEntity: FeedChannelItem
+            mappedBy: feedChannel
+            orphanRemoval: true
+            cascade: ["persist", "remove", "merge"]
+        channelCategory:
+            targetEntity: FeedChannelCategory
+            mappedBy: feedChannel
+            orphanRemoval: true
+            cascade: ["persist", "remove", "merge"]
+

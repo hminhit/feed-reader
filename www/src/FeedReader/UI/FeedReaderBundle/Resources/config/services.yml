@@ -1,0 +1,19 @@
+services:
+    feed_reader.ui.console.retrieve_feed_from_multi_url:
+        class: FeedReader\UI\FeedReaderBundle\Console\RetrieveFeedFromMultiUrlConsole
+        tags:
+            - {name: console.command}
+    feed_reader.infrastructure.persistence.doctrine.feed_channel_repository:
+        class: FeedReader\Infrastructure\Persistence\Doctrine\Repository\DoctrineFeedChannelRepository
+        factory: ['@doctrine', 'getRepository']
+        arguments:
+            - FeedReader\Domain\Model\Feed\FeedChannel
+    feed_reader.infrastructure.persistence.doctrine.feed_channel_category_repository:
+        class: FeedReader\Infrastructure\Persistence\Doctrine\Repository\DoctrineFeedChannelCategoryRepository
+        factory: ['@doctrine', 'getRepository']
+        arguments:
+            - FeedReader\Domain\Model\Feed\FeedChannelCategory
+    feed_reader.infrastructure.persistence.doctrine.feed_channel_item_repository:
+        class: FeedReader\Infrastructure\Persistence\Doctrine\Repository\DoctrineFeedChannelItemRepository
+        factory: ['@doctrine', 'getRepository']
+        arguments: [  FeedReader\Domain\Model\Feed\FeedChannelItem ]

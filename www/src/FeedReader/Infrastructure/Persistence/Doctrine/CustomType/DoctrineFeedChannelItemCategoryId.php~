@@ -1,0 +1,26 @@
+<?php
+
+namespace FeedReader\Infrastructure\Persistence\Doctrine\CustomType;
+
+/**
+ * Class DoctrineFeedChannelItemCategoryId
+ * @package FeedReader\Infrastructure\Persistence\Doctrine\CustomType
+ */
+class DoctrineFeedChannelItemCategoryId extends DoctrineEntityId
+{
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'FeedChannelItemCategoryId';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getNamespace()
+    {
+        return 'FeedReader\Domain\Model\Feed';
+    }
+}

@@ -1,0 +1,24 @@
+FeedReader\Domain\Model\Feed\FeedChannelCategory:
+    type: entity
+    table: feed_reader_feed_channel_category
+    repositoryClass: FeedReader\Infrastructure\Persistence\Doctrine\Repository\DoctrineFeedChannelCategoryRepository
+    id:
+        feedChannelCategoryId:
+            column: category_id
+            type: FeedChannelCategoryId
+    fields:
+        categoryName:
+            type: string
+            column: category_name
+        categoryDomain:
+            type: string
+            column: category_domain
+            nullable: true
+    manyToOne:
+        feedChannel:
+            targetEntity: FeedChannel
+            orphanRemoval: true
+            joinColumn:
+                name: channel_id
+                referencedColumnName: channel_id
+            inversedBy: channelCategory

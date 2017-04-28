@@ -1,0 +1,97 @@
+<?php
+namespace FeedReader\Domain\Model\Feed;
+
+/**
+ * Class FeedChannelItemCategory
+ * @package FeedReader\Domain\Model\Feed
+ */
+class FeedChannelItemCategory
+{
+    /**
+     * @var FeedChannelItemCategoryId
+     */
+    protected $feedChannelItemCategoryId;
+
+    /**
+     * @var string
+     */
+    protected $categoryName;
+
+    /**
+     * @var string
+     */
+    protected $categoryDomain;
+
+    /**
+     * @var FeedChannelItem
+     */
+    protected $feedChannelItem;
+
+    /**
+     * FeedChannelItemCategory constructor.
+     * @param FeedChannelItemCategoryId $feedChannelItemCategoryId
+     * @param FeedChannelItem $feedChannelItem
+     * @param $categoryName
+     * @param $categoryDomain
+     */
+    public function __construct(
+        FeedChannelItemCategoryId $feedChannelItemCategoryId
+        , FeedChannelItem $feedChannelItem
+        , $categoryName
+        , $categoryDomain
+    )
+    {
+        $this->feedChannelItemCategoryId = $feedChannelItemCategoryId;
+        $this->feedChannelItem = $feedChannelItem;
+        $this->setCategoryName($categoryName);
+        $this->setCategoryDomain($categoryDomain);
+    }
+
+    /**
+     * @return FeedChannelItemCategoryId
+     */
+    public function id()
+    {
+        return $this->feedChannelItemCategoryId;
+    }
+
+    /**
+     * @param $categoryName
+     */
+    protected function setCategoryName($categoryName)
+    {
+        $this->categoryName = $categoryName;
+    }
+
+    /**
+     * @param $categoryDomain
+     */
+    protected function setCategoryDomain($categoryDomain)
+    {
+        $this->categoryDomain = $categoryDomain;
+    }
+
+    /**
+     * @return string
+     */
+    public function categoryName()
+    {
+        return $this->categoryName;
+    }
+
+    /**
+     * @return string
+     */
+    public function categoryDomain()
+    {
+        return $this->categoryDomain;
+    }
+
+    /**
+     * @return FeedChannelItem
+     */
+    public function feedChannelItem()
+    {
+        return $this->feedChannelItem;
+    }
+}

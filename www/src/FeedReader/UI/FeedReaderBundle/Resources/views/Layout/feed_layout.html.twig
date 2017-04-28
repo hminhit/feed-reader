@@ -1,0 +1,12 @@
+{% extends 'FeedReaderBundle::base_layout.html.twig' %}
+{% block stylesheets_inline %}
+    <link href="{{ asset('bundles/feedreader/css/feed.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    {% include('FeedReaderBundle:Layout:Shared/_nav_top.html.twig') %}
+    {% block feed_body %}{% endblock %}
+{% endblock %}
+{% block javascript_libraries %}
+    <script src="{{ asset('bundles/feedreader/plugins/jquery/jquery-2.2.4.min.js') }}"></script>
+    <script src="{{ asset('bundles/feedreader/bootstrap/js/bootstrap.min.js') }}"></script>
+{% endblock %}

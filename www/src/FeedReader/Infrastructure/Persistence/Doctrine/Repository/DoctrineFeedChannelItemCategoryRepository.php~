@@ -1,0 +1,15 @@
+<?php
+namespace FeedReader\Infrastructure\Persistence\Doctrine\Repository;
+
+use Doctrine\ORM\EntityRepository;
+use FeedReader\Domain\Model\Feed\FeedChannelItemCategoryRepository;
+
+/**
+ * Class DoctrineFeedChannelItemCategoryRepository
+ * @package FeedReader\Infrastructure\Persistence\Doctrine\Repository
+ */
+class DoctrineFeedChannelItemCategoryRepository
+    extends EntityRepository
+    implements FeedChannelItemCategoryRepository
+{
+}

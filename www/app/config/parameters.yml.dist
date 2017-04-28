@@ -1,0 +1,8 @@
+# This file is auto-generated during the composer install
+parameters:
+    feedreader_mysql_56_database_host: feeds-reader-mysql
+    feedreader_mysql_56_database_port: 3306
+    feedreader_mysql_56_database_name: feeds-reader
+    feedreader_mysql_56_database_user: feeds-reader
+    feedreader_mysql_56_database_password: feeds-reader@123
+    secret: feedreader

@@ -1,0 +1,12 @@
+feed_reader_feed_list_feed_channel:
+    path:     /
+    defaults: { _controller: FeedReaderBundle:Feed/ListFeedChannel:index }
+feed_reader_feed_remove_feed_channel:
+    path:     /remove/{channel_id}
+    defaults: { _controller: FeedReaderBundle:Feed/RemoveFeedChannel:index }
+feed_reader_feed_add_feed_channel:
+    path:     /add
+    defaults: { _controller: FeedReaderBundle:Feed/AddFeedChannel:index }
+feed_reader_feed_edit_feed_channel:
+    path:     /edit/{channel_id}
+    defaults: { _controller: FeedReaderBundle:Feed/EditFeedChannel:index }

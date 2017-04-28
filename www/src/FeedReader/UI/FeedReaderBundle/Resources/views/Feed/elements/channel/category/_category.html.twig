@@ -1,0 +1,18 @@
+<div class="form-group" data-coordinate-group="channel-category-item">
+    <label class="col-md-1 control-label"></label>
+    <div class="col-md-11">
+        <div class="col-md-12">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label>{{ '<category domain="'|e }}</label>
+                    {{ form_widget(feedChannelCategoryForm['categoryDomain'], {'attr': {'class': 'form-control', 'placeholder': '' }}) }}
+                    <label>{{ '">'|e }}</label>
+                    {{ form_widget(feedChannelCategoryForm['categoryName'], {'attr': {'class': 'form-control', 'placeholder': '' }}) }}
+                    <label>{{ '</category>'|e }}</label>
+                    <button type="button" class="btn btn-primary" data-btn-remove-channel-category><i class="glyphicon glyphicon-remove"></i></button>
+                    {{ form_widget(feedChannelCategoryForm['categoryId']) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

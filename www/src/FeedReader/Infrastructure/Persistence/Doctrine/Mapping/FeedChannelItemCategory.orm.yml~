@@ -1,0 +1,22 @@
+FeedReader\Domain\Model\Feed\FeedChannelItemCategory:
+    type: entity
+    table: feed_reader_feed_channel_item_category
+    repositoryClass: FeedReader\Infrastructure\Persistence\Doctrine\Repository\DoctrineFeedChannelItemCategoryRepository
+    id:
+        feedChannelItemCategoryId:
+            column: category_id
+            type: FeedChannelItemCategoryId
+    fields:
+        categoryName:
+            type: string
+            column: category_name
+        categoryDomain:
+            type: text
+            column: category_domain
+    manyToOne:
+        feedChannelItem:
+            targetEntity: FeedChannelItem
+            joinColumn:
+                name: item_id
+                referencedColumnName: item_id
+            inversedBy: itemCategory

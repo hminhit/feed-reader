@@ -1,0 +1,103 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: '../../src/FeedReader/UI/FeedReaderBundle/Resources/config/services.yml' }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en
+
+framework:
+    #esi: ~
+    #translator: { fallbacks: ['%locale%'] }
+    secret: '%secret%'
+    router:
+        resource: '%kernel.root_dir%/config/routing.yml'
+        strict_requirements: ~
+    form: ~
+    csrf_protection: ~
+    validation: { enable_annotations: true }
+    #serializer: { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale: '%locale%'
+    trusted_hosts: ~
+    trusted_proxies: ~
+    session:
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+    fragments: ~
+    http_method_override: true
+    assets: ~
+    php_errors:
+        log: true
+
+# Twig Configuration
+twig:
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        default_connection: feedreader_mysql_56
+        connections:
+            feedreader_mysql_56:
+                driver:   pdo_mysql
+                host:     "%feedreader_mysql_56_database_host%"
+                port:     "%feedreader_mysql_56_database_port%"
+                dbname:   "%feedreader_mysql_56_database_name%"
+                user:     "%feedreader_mysql_56_database_user%"
+                password: "%feedreader_mysql_56_database_password%"
+                charset:  UTF8
+        types:
+            FeedChannelId: FeedReader\Infrastructure\Persistence\Doctrine\CustomType\DoctrineFeedChannelId
+            FeedChannelCategoryId: FeedReader\Infrastructure\Persistence\Doctrine\CustomType\DoctrineFeedChannelCategoryId
+            FeedChannelItemId: FeedReader\Infrastructure\Persistence\Doctrine\CustomType\DoctrineFeedChannelItemId
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.root_dir%/../var/data/data.sqlite"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #path: '%database_path%'
+
+    orm:
+        default_entity_manager: feedreader_mysql_56
+        auto_generate_proxy_classes: '%kernel.debug%'
+        entity_managers:
+            feedreader_mysql_56:
+                connection: feedreader_mysql_56
+                auto_mapping: false
+                mappings:
+                    Feed:
+                        type: yml
+                        is_bundle: false
+                        dir: '%kernel.root_dir%/../src/FeedReader/Infrastructure/Persistence/Doctrine/Mapping'
+                        prefix: FeedReader\Domain\Model\Feed
+                        alias: FeedReaderModelFeed
+monolog:
+    channels: [retrieve_feed_from_url]
+    handlers:
+        retrieve_feed_from_url:
+            type: group
+            members: [retrieve_feed_from_url_stream]
+        retrieve_feed_from_url_stream:
+            type: stream
+            level: info
+            path: '%kernel.logs_dir%/%kernel.environment%.retrieve_feed_from_url.log'
+            channels: [retrieve_feed_from_url]
+
+knp_paginator:
+    page_range: 10                     # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: 'KnpPaginatorBundle:Pagination:sliding.html.twig'     # sliding pagination controls template
+        sortable: 'KnpPaginatorBundle:Pagination:sortable_link.html.twig' # sort link template
+

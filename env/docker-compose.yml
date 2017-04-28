@@ -1,0 +1,35 @@
+###############################################################################
+#                          Generated on phpdocker.io                          #
+###############################################################################
+
+feeds-reader-mysql:
+  image: mysql:5.6
+  container_name: feeds-reader-mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=feeds-reader@123
+    - MYSQL_DATABASE=feeds-reader
+    - MYSQL_USER=feeds-reader
+    - MYSQL_PASSWORD=feeds-reader@123
+  ports:
+   - "3306:3306"
+
+feeds-reader-webserver:
+  image: phpdockerio/nginx:latest
+  container_name: feeds-reader-webserver
+  volumes:
+      - ..:/var/www/feeds-reader
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+  ports:
+   - "8080:80"
+  links:
+   - feeds-reader-php-fpm
+
+feeds-reader-php-fpm:
+  build: .
+  dockerfile: php-fpm/Dockerfile
+  container_name: feeds-reader-php-fpm
+  volumes:
+    - ..:/var/www/feeds-reader
+    - ./php-fpm/php-ini-overrides.ini:/etc/php5/fpm/conf.d/99-overrides.ini
+  links:
+    - feeds-reader-mysql

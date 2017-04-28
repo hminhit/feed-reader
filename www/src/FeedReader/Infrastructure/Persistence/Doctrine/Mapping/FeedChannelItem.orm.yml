@@ -1,0 +1,69 @@
+FeedReader\Domain\Model\Feed\FeedChannelItem:
+    type: entity
+    table: feed_reader_feed_channel_item
+    repositoryClass: FeedReader\Infrastructure\Persistence\Doctrine\Repository\DoctrineFeedChannelItemRepository
+    id:
+        feedChannelItemId:
+            column: item_id
+            type: FeedChannelItemId
+    fields:
+        itemTitle:
+            type: string
+            column: item_title
+            nullable: true
+        itemDescription:
+            type: text
+            column: item_description
+            nullable: true
+#        itemAuthor:
+#            type: string
+#            column: item_author
+#            nullable: true
+#        itemComments:
+#            type: string
+#            column: item_comments
+#            nullable: true
+#        itemEnclosureUrl:
+#            type: string
+#            column: item_enclosure_url
+#            nullable: true
+#        itemEnclosureLength:
+#            type: string
+#            column: item_enclosure_Length
+#            nullable: true
+#        itemEnclosureType:
+#            type: string
+#            column: item_enclosure_Type
+#            nullable: true
+#        itemGuid:
+#            type: string
+#            column: item_guid
+#            nullable: true
+#        itemGuidIsPermaLink:
+#            type: string
+#            column: item_guid_is_permaLink
+#            nullable: true
+#        itemSource:
+#            type: string
+#            column: item_source
+#            nullable: true
+#        itemSourceUrl:
+#            type: string
+#            column: item_source_url
+#            nullable: true
+#        itemPubDate:
+#            type: datetime
+#            column: item_pub_date
+#            nullable: true
+    manyToOne:
+        feedChannel:
+            targetEntity: FeedChannel
+            joinColumn:
+                name: channel_id
+                referencedColumnName: channel_id
+            inversedBy: channelItem
+#    oneToMany:
+#        itemCategory:
+#            targetEntity: FeedChannelItemCategory
+#            mappedBy: feedChannelItem
+#            cascade: ["persist", "remove"]

@@ -1,0 +1,3 @@
+feed_reader:
+    resource: "@FeedReaderBundle/Resources/config/routing.yml"
+    prefix: /

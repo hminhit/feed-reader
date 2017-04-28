@@ -1,0 +1,50 @@
+<?php
+namespace FeedReader\Domain\Model\Feed;
+
+use Ramsey\Uuid\Uuid;
+
+/**
+ * Class FeedChannelItemCategoryId
+ * @package FeedReader\Domain\Model\Feed
+ */
+class FeedChannelItemCategoryId
+{
+    /**
+     * @var string
+     */
+    private $id;
+
+    /**
+     * @param string $id
+     */
+    public function __construct($id = null)
+    {
+        $this->id = $id ?: Uuid::uuid4()->toString();
+    }
+
+    /**
+     * @return string
+     */
+    public function id()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param FeedChannelItemCategoryId $feedChannelItemCategoryId
+     *
+     * @return bool
+     */
+    public function equals(FeedChannelItemCategoryId $feedChannelItemCategoryId)
+    {
+        return $this->id() === $feedChannelItemCategoryId->id();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->id();
+    }
+}
